@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="ourp5.js"></script>
+	<script>
+		
+		
+		function setup(){
+			console.log("Set Up Called...");
+			createCanvas(500,500);
+			//background('black');
+		}
+		var x= 10;
+		var speed = 1;
+		function draw(){
+			console.log("Draw Called...");
+			background('black');
+			fill('yellow');
+			rect(x,100,50,50);
+			x = x + speed;
+		}
+		
+		
+		
+			
+	//var ctx = document.getElementById("canId");
+	//var canvasContext = ctx.getContext("2d");
+		
+		
+		
+								
+	</script>
+</head>
+<body>
+<!--
+	<canvas id="canId" height="500" width="500" style="background-color:black">
+		
+	</canvas>
+-->
+</body>
+</html>

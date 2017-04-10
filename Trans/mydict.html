@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="p5.min.js"></script>
+	<script>
+	function setup(){
+		document.getElementById("search").addEventListener("click",callServer);
+		
+	}
+	function callServer(){
+	document.getElementById("result").innerHTML="";	document.getElementById("show").style.display="block";
+		var word = document.getElementById("myword").value;
+		var url = "http://api.wordnik.com/v4/word.json/"+word+"/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+		console.log(url);
+		loadJSON(url,done);
+	}
+	function done(data){
+		console.log(data);
+		var msg = "";
+		data.forEach(function(currentObject){
+			if(currentObject.relationshipType=="synonym"){
+				currentObject.words.forEach(function(word){
+					msg = msg  + word +  " ";
+				});
+			}
+		});
+		document.getElementById("show").style.display="none";
+		document.getElementById("result").innerHTML=msg;
+	}	
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Type Your Word" id="myword">
+	<button id="search">Search</button>
+	<h1 id="result"></h1>
+	<div id="show" style="display:none">
+	<img src="ajax-loader.gif" >
+	</div>
+</body>
+</html>

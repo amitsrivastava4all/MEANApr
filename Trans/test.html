@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	function speakNow(){
+		var msg = document.getElementById("mytxt").value;
+		var u = new SpeechSynthesisUtterance(msg);
+    speechSynthesis.speak(u);
+	}
+	</script>
+</head>
+<body>
+<textarea name="" id="mytxt" cols="30" rows="10" placeholder="Type Text"></textarea>
+	<button onclick="speakNow()">Speak</button>
+</body>
+</html>

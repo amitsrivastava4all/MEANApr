@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="p5.min.js">
+	
+	</script>
+	<script>
+	function setup(){
+		document.getElementById("searchBt").addEventListener("click",callServer);
+		
+	}
+	function callServer(){
+		var word = document.getElementById("word").value;
+		var url = "http://api.wordnik.com/v4/word.json/"+word+"/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+		loadJSON(url,done);
+	}	
+	function done(data){
+		var str = "";
+		if(done){
+			data.forEach(function(object){
+				if(object.relationshipType=="synonym"){
+					object.words.forEach(function(word){
+						str += word + " ";
+					});
+				}
+			})
+			document.getElementById("result").innerHTML = str;
+		}
+	}	
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Type Word to Search" id="word">
+	<button id="searchBt">Search</button>
+	<h1 id="result"></h1>
+</body>
+</html>
