@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="libs/angular.min.js"></script>
+	<script src="js/module.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/shopfactory.js"></script>
+	<script src="js/shopcontroller.js"></script>
+</head>
+<body ng-app="shop" ng-controller="shopctrl">
+<input type="checkbox" ng-model="ascdesc">Asc/Desc
+<select ng-model="orderValue">
+<option>name</option>
+<option >price</option>
+<option >vendor</option>
+	</select>
+<button ng-click="loadProducts()">Load Products</button>
+
+<input type="checkbox" ng-model="showMe">Filter
+
+	<div ng-show="showMe">
+		<label for="">Type Mobile to Search</label>
+<input type="text" ng-model="search.price">
+		
+	</div>
+		<ul>
+		<li ng-repeat="mobile in result.data.mobiles|filter:search|orderBy:orderValue:ascdesc">
+			{{mobile.name|uppercase}} &nbsp; {{mobile.price|currency}} &nbsp; {{mobile.vendor}}
+			&nbsp; <img ng-src='{{mobile.image}}'>
+		</li>
+	</ul>
+</body>
+</html>
