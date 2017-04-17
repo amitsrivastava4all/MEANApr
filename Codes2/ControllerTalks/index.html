@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="angular.min.js"></script>
+	<script>
+	var app  = angular.module("mymodule",[]);
+		app.factory("myfactory",function(){
+			var object = {
+				x:0,
+				setX:function(x){
+					this.x = x;
+				},
+				getX:function(){
+					return this.x;
+				}
+				
+				
+			};
+			
+			return object;
+			
+		})
+	app.controller("myctrl",function($scope,$rootScope,myfactory){
+		$rootScope.firstName = "Amit";
+		myfactory.setX(1000);
+		$scope.result= myfactory.getX();
+		//$scope.firstName = "Amit";
+	});
+	app.controller("myctrl2",function($scope,myfactory){
+		$scope.lastName="Srivastava";
+		$scope.data = myfactory.getX();
+	})
+	app.controller("myctrl3",function($scope){
+		//$scope.lastName="Srivastava";
+	})
+	</script>
+</head>
+<body ng-app="mymodule">
+<!-- Inherit
+	<div id="div1" ng-controller="myctrl" >
+		{{firstName}}
+		<div id="div2" ng-controller="myctrl2">
+		{{firstName}} &nbsp;{{lastName}}
+	</div>
+	</div>
+-->
+<!-- this page is created by NAme ()-->
+	<div id="div1" ng-controller="myctrl" >
+		{{firstName}} &nbsp; {{result}}
+	</div>
+	<div id="div2" ng-controller="myctrl2">
+		{{firstName}} &nbsp;{{lastName}} &nbsp; {{data}}
+	</div>
+	<div id="div3" ng-controller="myctrl3">
+		Hello {{firstName}} 
+	</div>
+	
+</body>
+</html>

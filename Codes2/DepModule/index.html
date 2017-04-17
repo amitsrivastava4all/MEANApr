@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="angular.min.js"></script>
+	<script>
+	var app = angular.module("myapp",["myapp2","myapp3"]);
+		
+	app.filter("initcap",function(){
+		return function(args){
+			console.log("Arguments ",args);
+			return args.charAt(0).toUpperCase() + args.substring(1).toLowerCase();
+		}
+	})	
+	app.controller("myctrl",function($scope,myfactory,myfactory2,myfactory3,myservice,$filter){
+		$scope.result =myfactory.show() + " "+myfactory2.print()+" "+myfactory3.output()+" "+myservice.x+" "+myservice.y+" "+myfactory.x+" "+myfactory.y;
+		$scope.number = myfactory.x;
+		$scope.msg = myfactory.show();
+		$scope.name = "aMiT";
+		$scope.anothername=$filter("initcap")("rAM");
+	});
+	app.service("myservice",function(){
+		this.x = 100;
+		this.y = 200;
+	})	
+	app.factory("myfactory",function(){
+		return {
+			x:1000,
+			y:2000,
+			show:function(){
+				return "this is show";
+			}
+		};
+	})	
+	var app2= angular.module("myapp2",[]);
+	app2.factory("myfactory2",function(){
+		return {
+			print:function(){
+				return "this is print";
+			}
+		};
+	})		
+	var app3= angular.module("myapp3",[]);
+	app3.factory("myfactory3",function(){
+		return {
+			output:function(){
+				return "this is output";
+			}
+		};
+	})		
+	</script>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="myctrl">
+		{{result}}
+		<br>
+		{{number|currency:"€":3}}
+		<br>
+		{{msg|uppercase}}
+		<br>
+		{{name|initcap}} 
+		<br>
+		{{anothername}}
+	</div>
+</body>
+</html>
