@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="custom.css">
+	<script src="angular.min.js"></script>
+	<script>
+	var app = angular.module("myapp",[]);
+	app.controller("myctrl",function($scope){
+		var isAttempted = false;
+		$scope.isAttempted =isAttempted;
+		$scope.changeAttempt=function(){
+			isAttempted = true;
+			$scope.isAttempted = isAttempted;
+		}
+	})	
+	</script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+	<input type="radio" name="e" ng-click="changeAttempt()">
+	<input type="radio" name="e" ng-click="changeAttempt()">
+	<input type="radio" name="e" ng-click="changeAttempt()">
+	<input type="radio" name="e" ng-click="changeAttempt()">
+	{{isAttempted}}
+	<div  ng-class="{greencircle:isAttempted,redcircle:isAttempted==false}">
+	
+</div>
+</body>
+</html>
